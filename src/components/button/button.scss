@@ -1,0 +1,64 @@
+$bg-red: #c72929;
+$bg-black--hover: #000;
+$text-white: #fff;
+
+.button {
+  position: absolute;
+  left: 50%;
+  bottom: 2.375rem;
+  transform: translateX(-50%);
+  width: calc(80%);
+  height: 3.1875rem;
+  color: $text-white;
+  border-radius: 2.5rem;
+  background-color: $bg-red;
+  transition: all 400ms ease;
+
+  &:hover {
+    background-color: $bg-black--hover;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &.float {
+    position: fixed;
+    bottom: 1rem;
+    left: 50%;
+    width: max-content;
+    padding: 0 2rem;
+    border: 3px solid $text-white;
+    transform-origin: 50% 50%;
+    animation-name: pulse;
+    animation-duration: 0.8s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+
+    &:hover {
+      background-color: $bg-black--hover;
+    }
+
+    &:disabled {
+      display: none;
+    }
+
+    @keyframes pulse {
+      from {
+        transform: translateX(-50%) scale(0.975);
+      }
+
+      to {
+        transform: translateX(-50%) scale(1.1);
+      }
+    }
+  }
+
+  a {
+    display: block;
+    color: inherit;
+    line-height: 3.1875rem;
+  }
+}

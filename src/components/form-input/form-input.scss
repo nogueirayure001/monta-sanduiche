@@ -1,0 +1,28 @@
+$input-border: #000;
+$bg-white: #fff;
+
+.form-input {
+  position: absolute;
+  inset: 0;
+  border: 1px solid $input-border;
+  border-radius: 0.25rem;
+  background-color: $bg-white;
+
+  & + .form-input-label {
+    position: absolute;
+    bottom: 50%;
+    left: 1rem;
+    transform: translateY(50%);
+    line-height: 1;
+    transition: all 400ms ease;
+    z-index: 2;
+  }
+
+  &:focus + .form-input-label {
+    position: absolute;
+    bottom: calc(100% + 0.5rem);
+    left: 0;
+    transform: none;
+    z-index: 2;
+  }
+}

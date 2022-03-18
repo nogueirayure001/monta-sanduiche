@@ -1,0 +1,12 @@
+$bg-red: #c62828;
+
+.title-wrapper {
+  padding: 0.625rem;
+  background-color: $bg-red;
+
+  .title {
+    font-size: 2.5rem;
+    color: #fff;
+    text-align: center;
+  }
+}

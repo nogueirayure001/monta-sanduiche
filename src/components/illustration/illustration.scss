@@ -1,0 +1,13 @@
+.illustration-wrapper {
+  width: 40%;
+  max-width: 272px;
+
+  .illustration {
+    padding-top: 100%;
+    background: {
+      repeat: no-repeat;
+      size: contain;
+      position: center;
+    }
+  }
+}

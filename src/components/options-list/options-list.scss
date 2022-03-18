@@ -1,0 +1,12 @@
+.options-list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 1rem;
+
+  .option-wrapper {
+    position: relative;
+    width: 100%;
+    height: 3.1875rem;
+  }
+}

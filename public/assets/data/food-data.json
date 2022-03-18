@@ -1,0 +1,122 @@
+[
+  {
+    "title": "Escolha seu pão",
+    "subtitle": "",
+    "ingredient": "bread",
+    "multiChoice": false,
+    "options": [
+      {
+        "name": "Brioche",
+        "price": 5.00
+      },
+      {
+        "name": "Australiano",
+        "price": 4.00
+      },
+      {
+        "name": "Gergelim",
+        "price": 3.00
+      },
+      {
+        "name": "Sal",
+        "price": 2.50
+      }
+    ]
+  },
+  {
+    "title": "Escolha sua carne",
+    "subtitle": "",
+    "ingredient": "filling",
+    "multiChoice": false,
+    "options": [
+      {
+        "name": "Boi",
+        "price": 8.00
+      },
+      {
+        "name": "Porco",
+        "price": 6.00
+      },
+      {
+        "name": "Frango",
+        "price": 4.00
+      },
+      {
+        "name": "Vegetariano",
+        "price": 6.00
+      }
+    ]
+  },
+  {
+    "title": "Escolha seu queijo",
+    "subtitle": "",
+    "ingredient": "cheese",
+    "multiChoice": false,
+    "options": [
+      {
+        "name": "Molho Gorgonzola",
+        "price": 8.00
+      },
+      {
+        "name": "Prato",
+        "price": 6.00
+      },
+      {
+        "name": "Cheddar",
+        "price": 6.00
+      },
+      {
+        "name": "Sem queijo",
+        "price": 0.00
+      }
+    ]
+  },
+  {
+    "title": "Escolha suas saladas",
+    "subtitle": "Mais de uma opção selecionável",
+    "multiChoice": true,
+    "ingredient": "salads",
+    "options": [
+      {
+        "name": "Alface",
+        "price": 1.00
+      },
+      {
+        "name": "Tomate",
+        "price": 2.00
+      },
+      {
+        "name": "Cebola",
+        "price": 2.00
+      },
+      {
+        "name": "Picles",
+        "price": 4.00
+      }
+    ]
+  },
+  {
+    "title": "Escolha seus complementos",
+    "subtitle": "Mais de uma opção selecionável",
+    "multiChoice": true,
+    "ingredient": "complement",
+    "options": [
+      {
+        "name": "Bacon",
+        "price": 4.00
+      },
+      {
+        "name": "Cebola Caramelizada",
+        "price": 2.00
+      },
+      {
+        "name": "Molho Especial",
+        "price": 3.00
+      },
+      {
+        "name": "Pimenta Jalapeño",
+        "price": 3.00
+      }
+    ]
+  }  
+]

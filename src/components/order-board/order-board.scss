@@ -1,0 +1,21 @@
+.order-board {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 28rem;
+
+  .amount-due {
+    position: absolute;
+    right: 50%;
+    transform: translateX(50%);
+    bottom: 7rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+}
+
+@media screen and (min-width: 764px) {
+  .order-board {
+    height: 100%;
+  }
+}

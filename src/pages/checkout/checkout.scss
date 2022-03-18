@@ -1,0 +1,24 @@
+.checkout-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+
+  .main-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    gap: 2.5rem;
+    padding: 2.5rem;
+  }
+}
+
+@media screen and (min-width: 764px) {
+  .checkout-page {
+    .main-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      justify-items: stretch;
+      align-content: stretch;
+    }
+  }
+}

@@ -1,0 +1,18 @@
+$text-red: #8e0000;
+
+.order-summary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+
+  .thanks-message {
+    margin-top: 1rem;
+    font-size: 1.5rem;
+    color: $text-red;
+  }
+
+  .order-list-wrapper {
+    max-width: 80%;
+  }
+}
