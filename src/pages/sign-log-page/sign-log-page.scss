@@ -1,0 +1,47 @@
+$bg-black: #000;
+
+$header-height: 4.1875rem;
+$minHeight: calc(100% - #{$header-height});
+
+.sign-log-page {
+  display: flex;
+  flex-direction: column;
+  min-height: $minHeight;
+
+  .sign-in-sign-up-forms {
+    flex: 1 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2.5rem;
+
+    .forms-wrapper {
+      flex: 1 1 22rem;
+      max-width: 30rem;
+
+      .select-form {
+        position: relative;
+        display: flex;
+        height: 3.1875rem;
+
+        & button {
+          position: absolute;
+          bottom: 0;
+          width: calc(50% + 1.25rem);
+
+          &:first-child {
+            left: 0;
+            border-radius: 2.5rem 0 0 0;
+            clip-path: polygon(0 0, 100% 0, calc(100% - 2.5rem) 100%, 0 100%);
+          }
+
+          &:last-child {
+            right: 0;
+            border-radius: 0 2.5rem 0 0;
+            clip-path: polygon(2.5rem 0, 100% 0, 100% 100%, 0 100%);
+          }
+        }
+      }
+    }
+  }
+}

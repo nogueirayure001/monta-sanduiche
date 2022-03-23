@@ -1,6 +1,6 @@
 import FormInput from "../form-input/form-input";
 import Button from "../button/button";
-import { PAYMENT_FORM_DATA } from "../../assets/data/payment-form.data";
+import { PAYMENT_FORM_DATA } from "../../assets/data/form.data";
 import "./payment-form.scss";
 
 const PaymentForm = () => {

@@ -1,0 +1,44 @@
+$bg-red: #c72929;
+$bg-black--hover: #000;
+$text-white: #fff;
+
+.cart-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+
+  .cart-item-number {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 3.1875rem;
+    margin: 0 auto;
+    border: 2px solid $bg-red;
+    border-radius: 1.5rem;
+    text-align: center;
+    overflow: hidden;
+
+    .display {
+      flex: 1.5 0 3rem;
+      min-width: 3rem;
+      padding: 0.15rem 0;
+      font-size: 1.5rem;
+      font-weight: 700;
+      line-height: 3.1785rem;
+      background-color: $text-white;
+    }
+
+    button[type="button"] {
+      flex: 1 0 2rem;
+      font-size: 1.5rem;
+      color: $text-white;
+      background-color: $bg-red;
+      transition: background-color 400ms ease;
+
+      &:hover {
+        background-color: $bg-black--hover;
+      }
+    }
+  }
+}

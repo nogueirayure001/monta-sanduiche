@@ -3,22 +3,29 @@ import Illustration from "../illustration/illustration";
 import OrderList from "../order-list/order-list";
 import image from "../../assets/images/sanduiche-logo.png";
 
-const OrderSummary = ({ order, amountDue }) => (
-  <div className='order-summary'>
-    <Illustration image={image} />
+const OrderSummary = ({ cart }) => {
+  const totalAmountDue = cart.reduce((acc, current) => {
+    return acc + current.amountDue * current.howMany;
+  }, 0);
 
-    <p className='thanks-message'>Obrigado pela Preferência!</p>
+  return (
+    <div className='order-summary'>
+      <Illustration image={image} />
 
-    <div className='order-list-wrapper'>
-      <OrderList
-        order={{
-          ...order,
-          total: `R$ ${amountDue.toFixed(2).replace(".", ",")}`,
-        }}
-        title='Resumo do Pedido:'
-      />
+      <p className='thanks-message'>Obrigado pela Preferência!</p>
+
+      <div className='order-list-wrapper'>
+        <h3 className='list-title'>Resumo do Pedido:</h3>
+
+        <OrderList cart={cart} />
+
+        <p>
+          <span className='order-total'>Total:</span> R${" "}
+          {totalAmountDue.toFixed(2).replace(".", ",")}
+        </p>
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default OrderSummary;

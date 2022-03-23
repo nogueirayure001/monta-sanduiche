@@ -30,10 +30,20 @@ class OrderBoard extends Component {
     }
   };
 
+  handleFinishBuying = async () => {
+    const { addToCart } = this.props;
+
+    await addToCart();
+  };
+
   componentDidMount() {
     window.addEventListener("load", this.showOrHideFloatingButton);
     window.addEventListener("scroll", this.showOrHideFloatingButton);
     window.addEventListener("resize", this.showOrHideFloatingButton);
+  }
+
+  componentWillUnmount() {
+    console.log("will unmount");
   }
 
   render() {
@@ -66,10 +76,10 @@ class OrderBoard extends Component {
             <Button
               type='button'
               disabled={false}
-              handleClick={null}
+              handleClick={this.handleFinishBuying}
               ref={this.fixedButton}
             >
-              {<Link to='/checkout'>Prosseguir</Link>}
+              {<Link to='/cart'>Adicionar ao Carrinho</Link>}
             </Button>
           )}
 
@@ -88,52 +98,5 @@ class OrderBoard extends Component {
     );
   }
 }
-
-// const OrderBoard = ({
-//   order,
-//   amountDue,
-//   isButtonEnabled,
-//   updatePhase,
-//   orderPhase,
-// }) => {
-//   return (
-//     <div className='order-board'>
-//       <PresentationBoard title='Ingredientes Selecionados:'>
-//         <OrderList order={order} />
-
-//         {amountDue ? (
-//           <p className='amount-due'>
-//             TOTAL: R$ {amountDue.toFixed(2).replace(".", ",")}
-//           </p>
-//         ) : null}
-
-//         {orderPhase < MAX_PHASE ? (
-//           <Button
-//             type='button'
-//             disabled={!isButtonEnabled}
-//             handleClick={updatePhase}
-//           >
-//             Prosseguir
-//           </Button>
-//         ) : (
-//           <Button type='button' disabled={false} handleClick={null}>
-//             {<Link to='/checkout'>Prosseguir</Link>}
-//           </Button>
-//         )}
-
-//         {orderPhase < MAX_PHASE ? (
-//           <Button
-//             type='button'
-//             disabled={!isButtonEnabled}
-//             handleClick={updatePhase}
-//             float={true}
-//           >
-//             Prosseguir
-//           </Button>
-//         ) : null}
-//       </PresentationBoard>
-//     </div>
-//   );
-// };
 
 export default OrderBoard;

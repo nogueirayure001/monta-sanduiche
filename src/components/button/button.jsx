@@ -21,11 +21,13 @@ class Button extends Component {
   };
 
   render() {
-    const { children, type, disabled, handleClick, float } = this.props;
+    const { children, type, disabled, handleClick, float, active, style } =
+      this.props;
 
     return (
       <button
-        className={float ? "button float" : "button"}
+        className={`button ${float ? "float" : ""} ${active ? "active" : ""}`}
+        style={{ ...style }}
         type={type}
         disabled={disabled}
         onClick={handleClick}

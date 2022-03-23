@@ -3,6 +3,7 @@ import "./shop-page.scss";
 import PageTitle from "../../components/page-title/page-title";
 import OrderMenu from "../../components/order-menu/order-menu";
 import OrderBoard from "../../components/order-board/order-board";
+import { Navigate } from "react-router-dom";
 import { MAX_PHASE } from "../../assets/data/constants";
 
 class ShopPage extends Component {
@@ -36,33 +37,38 @@ class ShopPage extends Component {
   };
 
   render() {
-    const { data, order, amountDue, updateOrder } = this.props;
+    const { user, data, order, amountDue, updateOrder, addToCart } = this.props;
     const { orderPhase, isButtonEnabled } = this.state;
 
-    return data ? (
-      <main className='shop-page'>
-        <PageTitle title='Monte Seu Sanduíche' />
+    if (data) {
+      return user ? (
+        <main className='shop-page'>
+          <PageTitle title='Monte Seu Sanduíche' />
 
-        <div className='main-content'>
-          <OrderMenu
-            data={data}
-            orderPhase={orderPhase}
-            updateOrder={updateOrder}
-            updateButtonState={this.updateButtonState}
-          />
+          <div className='main-content'>
+            <OrderMenu
+              data={data}
+              orderPhase={orderPhase}
+              updateOrder={updateOrder}
+              updateButtonState={this.updateButtonState}
+            />
 
-          <OrderBoard
-            order={order}
-            amountDue={amountDue}
-            isButtonEnabled={isButtonEnabled}
-            orderPhase={orderPhase}
-            updatePhase={this.updatePhase}
-          />
-        </div>
-      </main>
-    ) : (
-      <main className='loading-page'>carregando...</main>
-    );
+            <OrderBoard
+              order={order}
+              amountDue={amountDue}
+              isButtonEnabled={isButtonEnabled}
+              orderPhase={orderPhase}
+              updatePhase={this.updatePhase}
+              addToCart={addToCart}
+            />
+          </div>
+        </main>
+      ) : (
+        <Navigate to='/' replace={true} />
+      );
+    } else {
+      return <main className='loading-page'>carregando...</main>;
+    }
   }
 }
 

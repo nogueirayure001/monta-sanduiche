@@ -1,15 +1,16 @@
 .order-list {
   margin-top: 1rem;
 
-  .list-title {
-    margin-bottom: 1.5rem;
-    text-align: center;
-    font-size: 1.5rem;
+  .how-many {
     font-weight: 700;
-    line-height: 1.2;
+    font-style: italic;
   }
 
   .list-key-name {
     font-weight: 700;
+  }
+
+  .list-break {
+    margin-bottom: 1rem;
   }
 }

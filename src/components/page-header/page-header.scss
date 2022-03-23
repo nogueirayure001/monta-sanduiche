@@ -1,0 +1,55 @@
+$text-black: #000;
+$bg-yellow: #ffc107;
+$details-red: #c72929;
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 4.1875rem;
+  padding: 0.5rem 1.5rem;
+  background-color: $bg-yellow;
+
+  .page-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+
+  .nav-links {
+    .links-list {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+
+      .link-item {
+        position: relative;
+        text-align: center;
+
+        &:last-child {
+          width: 6rem;
+        }
+
+        &:not(:last-child) a {
+          color: $text-black;
+          font-weight: 700;
+        }
+
+        &:not(:last-child)::after {
+          position: absolute;
+          left: 0;
+          bottom: -0.25rem;
+          content: " ";
+          width: 100%;
+          border-bottom: 5px solid $details-red;
+          transform-origin: center;
+          transform: scaleX(0);
+          transition: transform 400ms ease;
+        }
+
+        &:hover:not(:last-child)::after {
+          transform: scaleX(1);
+        }
+      }
+    }
+  }
+}

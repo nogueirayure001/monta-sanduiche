@@ -2,6 +2,8 @@ $bg-yellow: #ffc107;
 $text-black: #000;
 
 .presentation-board {
+  display: flex;
+  flex-direction: column;
   height: 100%;
   padding: 1.5rem;
   color: $text-black;

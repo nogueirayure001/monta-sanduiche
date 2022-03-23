@@ -1,5 +1,9 @@
+$header-height: 4.1875rem;
+$minHeight: calc(100% - #{$header-height});
+
 .shop-page {
-  min-height: 100%;
+  min-height: $minHeight;
+
   .main-content {
     display: flex;
     flex-direction: column;

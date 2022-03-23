@@ -14,5 +14,17 @@ $text-red: #8e0000;
 
   .order-list-wrapper {
     max-width: 80%;
+    margin-top: 1.5rem;
+
+    .list-title {
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .order-total {
+      font-weight: 700;
+    }
   }
 }

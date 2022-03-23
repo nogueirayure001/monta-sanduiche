@@ -1,0 +1,21 @@
+$bg-yellow: #ffc107;
+
+.sign-up-form {
+  width: 100%;
+  padding: 2.6875rem 1.5rem 2rem;
+  background-color: $bg-yellow;
+
+  .input-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 2.6875rem;
+    margin-bottom: 3rem;
+
+    .input-list-item {
+      position: relative;
+      width: 100%;
+      height: 2.1875rem;
+    }
+  }
+}
