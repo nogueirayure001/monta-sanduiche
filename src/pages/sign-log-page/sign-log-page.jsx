@@ -32,12 +32,12 @@ class SignInOrLogIn extends Component {
   };
 
   render() {
-    const { user } = this.props;
+    const { user, routesDidMount } = this.props;
     const { showSignInForm } = this.state;
 
-    return user ? (
-      <Navigate to='/shop' replace={true} />
-    ) : (
+    const goToShopPage = <Navigate to='/shop' replace={true} />;
+    const goToLoadingPage = <h1>CARREGANDO......</h1>;
+    const LogInSignUpPage = (
       <div className='sign-log-page'>
         <PageTitle title='Entre em Sua Conta ou Cadastre-se' />
 
@@ -66,6 +66,12 @@ class SignInOrLogIn extends Component {
         </div>
       </div>
     );
+
+    if (!user) {
+      return routesDidMount ? LogInSignUpPage : goToLoadingPage;
+    } else {
+      return goToShopPage;
+    }
   }
 }
 

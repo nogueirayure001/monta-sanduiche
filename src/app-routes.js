@@ -27,6 +27,7 @@ class AppRoutes extends Component {
       amountDue: 0,
       user: null,
       cart: [],
+      routesDidMount: false,
     };
   }
 
@@ -130,20 +131,25 @@ class AppRoutes extends Component {
     this.setState({ cart: newCart });
   };
 
-  componentDidMount() {
+  componentDidMount = () => {
     onAuthStateChanged(auth, (user) => {
-      this.setState({ user: user });
+      this.setState({ user: user, routesDidMount: true });
     });
-  }
+  };
 
   render() {
-    const { order, amountDue, user, cart } = this.state;
+    const { order, amountDue, user, cart, routesDidMount } = this.state;
 
     return (
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<PageHeader user={user} />}>
-            <Route index element={<SignInOrLogIn user={user} />} />
+            <Route
+              index
+              element={
+                <SignInOrLogIn user={user} routesDidMount={routesDidMount} />
+              }
+            />
 
             <Route
               path='/shop'
