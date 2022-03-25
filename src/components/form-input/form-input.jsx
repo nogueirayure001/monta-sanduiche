@@ -1,5 +1,5 @@
 import "./form-input.scss";
-import { Fragment, Component, createRef } from "react";
+import { Fragment, Component } from "react";
 
 class FormInput extends Component {
   constructor(props) {
