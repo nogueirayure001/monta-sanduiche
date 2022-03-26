@@ -23,7 +23,7 @@ const SignUpForm = () => {
   };
 
   return (
-    <form className='sign-in-form' onSubmit={handleSubmit}>
+    <form className='sign-in-form' onSubmit={handleSubmit} noValidate>
       <ul className='input-list'>
         <li className='input-list-item'>
           <FormInput {...email} ref={emailRef} />

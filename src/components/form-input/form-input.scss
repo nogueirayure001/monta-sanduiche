@@ -1,5 +1,6 @@
 $input-border: #000;
 $bg-white: #fff;
+$text-red: #c72929;
 
 .form-input {
   position: absolute;
@@ -30,5 +31,17 @@ $bg-white: #fff;
     bottom: calc(100% + 0.5rem);
     left: 0;
     transform: none;
+  }
+
+  & ~ .error-message {
+    position: absolute;
+    bottom: calc(100% + 0.5rem);
+    right: 0;
+    max-width: 70%;
+    line-height: 1;
+    color: $text-red;
+    font-weight: 700;
+    text-align: center;
+    z-index: 2;
   }
 }

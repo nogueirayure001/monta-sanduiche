@@ -1,23 +1,36 @@
 .order-board {
   position: relative;
-  display: flex;
-  flex-direction: column;
+  height: 100%;
 
-  .amount-due {
-    position: absolute;
-    right: 50%;
-    transform: translateX(50%);
-    bottom: 7rem;
-    font-size: 1.5rem;
-    font-weight: 700;
-  }
+  .presentation-board {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 
-  .button {
-    position: absolute;
-    left: 50%;
-    bottom: 2.375rem;
-    transform: translateX(-50%);
-    width: calc(80%);
+    .order-list {
+      min-height: 12rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .amount-due {
+      margin-bottom: 1.5rem;
+      font-size: 1.5rem;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .button {
+      width: calc(80%);
+      margin: 0 auto;
+
+      &.float {
+        position: fixed;
+        left: 50%;
+        bottom: 2.375rem;
+        transform: translateX(-50%);
+        width: max-content;
+      }
+    }
   }
 }
 

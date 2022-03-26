@@ -4,7 +4,6 @@ import PageTitle from "../../components/page-title/page-title";
 import CartControls from "../../components/cart-controls/cart-controls";
 import Button from "../../components/button/button";
 import { Link, Navigate } from "react-router-dom";
-
 import "./cart.scss";
 
 class Cart extends Component {
@@ -31,7 +30,13 @@ class Cart extends Component {
       <main className='cart-page'>
         <PageTitle title='Organize Seu Carrinho' />
 
-        <div className='cart-items-wrapper'>{cartItems}</div>
+        <div className='cart-items-wrapper'>
+          {cart.length ? (
+            cartItems
+          ) : (
+            <p className='empty-cart-message'>Seu carrinho está vazio.</p>
+          )}
+        </div>
 
         <div className='cart-nav-links'>
           <Button type='button'>

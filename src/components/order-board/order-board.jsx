@@ -83,12 +83,12 @@ class OrderBoard extends Component {
             </Button>
           )}
 
-          {orderPhase < MAX_PHASE ? (
+          {orderPhase < MAX_PHASE && shouldButtonFloat ? (
             <Button
               type='button'
               disabled={!isButtonEnabled}
               handleClick={updatePhase}
-              float={shouldButtonFloat}
+              float={true}
             >
               Prosseguir
             </Button>

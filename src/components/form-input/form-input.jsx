@@ -7,11 +7,50 @@ class FormInput extends Component {
 
     this.state = {
       fieldValue: "",
+      didBlurOnce: false,
+      showErrorMessage: false,
     };
   }
 
   handleChange = (e) => {
-    this.setState({ fieldValue: e.target.value });
+    const inputField = e.target;
+    const { didBlurOnce } = this.state;
+    let { extraValidityCheck } = this.props;
+
+    if (!extraValidityCheck) {
+      extraValidityCheck = () => true;
+    }
+
+    if (didBlurOnce) {
+      if (inputField.checkValidity() && extraValidityCheck(e)) {
+        this.setState({
+          fieldValue: inputField.value,
+          showErrorMessage: false,
+        });
+      } else {
+        this.setState({ fieldValue: inputField.value, showErrorMessage: true });
+      }
+    } else {
+      this.setState({ fieldValue: inputField.value });
+    }
+  };
+
+  handleBlur = (e) => {
+    const inputField = e.target;
+    const { didBlurOnce } = this.state;
+    let { extraValidityCheck } = this.props;
+
+    if (!extraValidityCheck) {
+      extraValidityCheck = () => true;
+    }
+
+    if (!didBlurOnce) {
+      if (!inputField.checkValidity() || !extraValidityCheck(e)) {
+        this.setState({ didBlurOnce: true, showErrorMessage: true });
+      } else {
+        this.setState({ didBlurOnce: true });
+      }
+    }
   };
 
   getValue = () => {
@@ -19,7 +58,8 @@ class FormInput extends Component {
   };
 
   render() {
-    const { label, id, type, fieldName, required, pattern } = this.props;
+    const { label, id, type, fieldName, required, pattern, errorMessage } =
+      this.props;
     const { fieldValue } = this.state;
 
     return (
@@ -32,11 +72,16 @@ class FormInput extends Component {
           required={required}
           pattern={pattern ? pattern : null}
           onChange={this.handleChange}
+          onBlur={this.handleBlur}
         />
 
         <label className='form-input-label' htmlFor={id}>
           {label}
         </label>
+
+        {this.state.showErrorMessage ? (
+          <p className='error-message'>{errorMessage}</p>
+        ) : null}
       </Fragment>
     );
   }

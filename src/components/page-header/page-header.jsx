@@ -5,10 +5,6 @@ import Button from "../button/button";
 import "./page-header.scss";
 
 const PageHeader = ({ user }) => {
-  if (user) {
-    console.log(user.email);
-  }
-
   return (
     <Fragment>
       <header className='page-header'>

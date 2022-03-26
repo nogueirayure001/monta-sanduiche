@@ -37,6 +37,11 @@ $minHeight: calc(100% - #{$header-height});
         }
       }
     }
+
+    .empty-cart-message {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
   }
 
   .cart-nav-links {

@@ -7,7 +7,11 @@ const PaymentForm = () => {
   const [name, cardNum, expDate, cvv, cpf] = PAYMENT_FORM_DATA;
 
   return (
-    <form className='payment-form' onSubmit={(e) => e.preventDefault()}>
+    <form
+      className='payment-form'
+      onSubmit={(e) => e.preventDefault()}
+      noValidate
+    >
       <ul className='input-list'>
         <li className='input-list-item'>
           <FormInput {...name} />
