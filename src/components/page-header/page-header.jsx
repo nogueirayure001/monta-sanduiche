@@ -35,6 +35,16 @@ class PageHeader extends Component {
     }
   };
 
+  handleLogOff = () => {
+    const { user, clearCart, saveCart } = this.props;
+
+    saveCart(user.uid);
+
+    clearCart();
+
+    signOutUser();
+  };
+
   componentDidMount() {
     window.addEventListener("click", this.handleClickOutsideMenu, true);
   }
@@ -82,7 +92,7 @@ class PageHeader extends Component {
 
               <li className='link-item'>
                 {user ? (
-                  <Button type='button' handleClick={() => signOutUser()}>
+                  <Button type='button' handleClick={this.handleLogOff}>
                     Sair
                   </Button>
                 ) : (

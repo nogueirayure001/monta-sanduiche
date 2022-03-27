@@ -131,9 +131,28 @@ class AppRoutes extends Component {
     this.setState({ cart: newCart });
   };
 
+  clearCart = () => {
+    this.setState({ cart: [] });
+  };
+
+  saveCart = (userUid) => {
+    const { cart } = this.state;
+    const cartString = JSON.stringify(cart);
+
+    localStorage.setItem(userUid, cartString);
+  };
+
   componentDidMount = () => {
     onAuthStateChanged(auth, (user) => {
       this.setState({ user: user, routesDidMount: true });
+
+      if (user) {
+        const storedCart = JSON.parse(localStorage.getItem(user.uid));
+
+        if (storedCart && storedCart.length) {
+          this.setState({ cart: storedCart });
+        }
+      }
     });
   };
 
@@ -143,7 +162,16 @@ class AppRoutes extends Component {
     return (
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<PageHeader user={user} />}>
+          <Route
+            path='/'
+            element={
+              <PageHeader
+                user={user}
+                clearCart={this.clearCart}
+                saveCart={this.saveCart}
+              />
+            }
+          >
             <Route
               index
               element={
