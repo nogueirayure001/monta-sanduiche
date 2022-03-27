@@ -1,8 +1,5 @@
-$header-height: 4.1875rem;
-$minHeight: calc(100% - #{$header-height});
-
 .shop-page {
-  min-height: $minHeight;
+  flex: 1 1 auto;
 
   .main-content {
     display: flex;

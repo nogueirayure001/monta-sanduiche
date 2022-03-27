@@ -5,6 +5,7 @@ import PageTitle from "../../components/page-title/page-title";
 import { Navigate } from "react-router-dom";
 import "./sign-log-page.scss";
 import Button from "../../components/button/button";
+import Loader from "../../components/loader/loader";
 
 class SignInOrLogIn extends Component {
   constructor(props) {
@@ -36,7 +37,7 @@ class SignInOrLogIn extends Component {
     const { showSignInForm } = this.state;
 
     const goToShopPage = <Navigate to='/shop' replace={true} />;
-    const goToLoadingPage = <h1>CARREGANDO......</h1>;
+    const goToLoadingPage = <Loader />;
     const LogInSignUpPage = (
       <div className='sign-log-page'>
         <PageTitle title='Entre em Sua Conta ou Cadastre-se' />

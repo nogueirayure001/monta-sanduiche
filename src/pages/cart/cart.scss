@@ -1,14 +1,11 @@
 $bg-yellow: #ffc107;
 
-$header-height: 4.1875rem;
-$minHeight: calc(100% - #{$header-height});
-
 .cart-page {
+  flex: 1 1 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  min-height: $minHeight;
 
   .cart-items-wrapper {
     display: flex;

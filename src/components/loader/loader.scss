@@ -1,0 +1,60 @@
+$bg-red: #c72929;
+$bg-yellow: #ffc107;
+
+.loading-window {
+  flex: 1 1 auto;
+  display: grid;
+  place-items: center;
+
+  .loader-wrapper {
+    position: relative;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+
+    .loader-item {
+      position: absolute;
+      left: 50%;
+      transform-origin: center center;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 1rem;
+      height: 4rem;
+      animation-duration: 1s;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+
+      .loader-circle {
+        position: absolute;
+        width: 1rem;
+        height: 1rem;
+        border-radius: 50%;
+
+        &:first-child {
+          top: -0.5rem;
+          background-color: $bg-red;
+        }
+
+        &:last-child {
+          bottom: -0.5rem;
+          background-color: $bg-yellow;
+        }
+      }
+    }
+
+    @for $i from 1 through 5 {
+      .loader-item:nth-child(#{$i}) {
+        transform: translateX(-50%) rotate(#{-60 + $i * 20}deg);
+        opacity: #{0.5 + $i * 0.1};
+        animation-name: rotate-#{$i};
+
+        @keyframes rotate-#{$i} {
+          100% {
+            transform: translateX(-50%) rotate(#{300 + $i * 20}deg);
+          }
+        }
+      }
+    }
+  }
+}
