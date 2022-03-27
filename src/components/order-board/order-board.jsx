@@ -37,13 +37,15 @@ class OrderBoard extends Component {
   };
 
   componentDidMount() {
-    window.addEventListener("load", this.showOrHideFloatingButton);
+    window.addEventListener("mousedown", this.showOrHideFloatingButton);
     window.addEventListener("scroll", this.showOrHideFloatingButton);
     window.addEventListener("resize", this.showOrHideFloatingButton);
   }
 
   componentWillUnmount() {
-    console.log("will unmount");
+    window.removeEventListener("mousedown", this.showOrHideFloatingButton);
+    window.removeEventListener("scroll", this.showOrHideFloatingButton);
+    window.removeEventListener("resize", this.showOrHideFloatingButton);
   }
 
   render() {

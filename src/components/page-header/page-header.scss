@@ -1,23 +1,43 @@
 $text-black: #000;
 $bg-yellow: #ffc107;
+$bg-white: #fff;
 $details-red: #c72929;
 
 .page-header {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  height: 4.1875rem;
-  padding: 0.5rem 1.5rem;
+  padding: 1rem 1.5rem;
   background-color: $bg-yellow;
 
   .page-title {
     font-size: 1.1rem;
     font-weight: 700;
+
+    & + button {
+      width: 6rem;
+    }
   }
 
   .nav-links {
+    width: 100%;
+    height: 12.6875rem;
+    padding: 1rem;
+    margin-top: 1rem;
+    background-color: $bg-white;
+    overflow: hidden;
+    transition: all 400ms ease;
+
+    &--closed {
+      height: 0;
+      padding: 0;
+      margin-top: 0;
+    }
+
     .links-list {
       display: flex;
+      flex-direction: column;
       align-items: center;
       gap: 1rem;
 
@@ -25,7 +45,7 @@ $details-red: #c72929;
         position: relative;
         text-align: center;
 
-        &:last-child {
+        button {
           width: 6rem;
         }
 
@@ -49,6 +69,32 @@ $details-red: #c72929;
         &:hover:not(:last-child)::after {
           transform: scaleX(1);
         }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 764px) {
+  .page-header {
+    .page-title {
+      & + button {
+        display: none;
+      }
+    }
+
+    .nav-links {
+      width: auto;
+      height: auto;
+      padding: 0;
+      margin: 0;
+      background-color: transparent;
+
+      &--closed {
+        height: auto;
+      }
+
+      .links-list {
+        flex-direction: row;
       }
     }
   }
