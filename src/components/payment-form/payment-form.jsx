@@ -1,44 +1,83 @@
+import { Component, createRef } from "react";
 import FormInput from "../form-input/form-input";
 import Button from "../button/button";
 import { PAYMENT_FORM_DATA } from "../../assets/data/form.data";
 import "./payment-form.scss";
 
-const PaymentForm = () => {
-  const [name, cardNum, expDate, cvv, cpf] = PAYMENT_FORM_DATA;
+class PaymentForm extends Component {
+  constructor(props) {
+    super(props);
 
-  return (
-    <form
-      className='payment-form'
-      onSubmit={(e) => e.preventDefault()}
-      noValidate
-    >
-      <ul className='input-list'>
-        <li className='input-list-item'>
-          <FormInput {...name} />
-        </li>
+    this.state = {
+      payButtonEnabled: false,
+    };
 
-        <li className='input-list-item'>
-          <FormInput {...cardNum} />
-        </li>
+    this.nameRef = createRef();
+    this.cardNumRef = createRef();
+    this.expDateRef = createRef();
+    this.cvvRef = createRef();
+    this.cpfRef = createRef();
+  }
 
-        <div className='two-columns-item'>
+  handleChange = () => {
+    const { payButtonEnabled } = this.state;
+
+    if (
+      this.nameRef.current.isFieldValid() &&
+      this.cardNumRef.current.isFieldValid() &&
+      this.expDateRef.current.isFieldValid() &&
+      this.cvvRef.current.isFieldValid() &&
+      this.cpfRef.current.isFieldValid()
+    ) {
+      this.setState({ payButtonEnabled: true });
+    } else if (payButtonEnabled) {
+      this.setState({ payButtonEnabled: false });
+    }
+  };
+
+  render() {
+    const [name, cardNum, expDate, cvv, cpf] = PAYMENT_FORM_DATA;
+    const { payButtonEnabled } = this.state;
+
+    return (
+      <form
+        className='payment-form'
+        onSubmit={(e) => {
+          e.preventDefault();
+        }}
+        onChange={this.handleChange}
+        noValidate
+      >
+        <ul className='input-list'>
           <li className='input-list-item'>
-            <FormInput {...expDate} />
+            <FormInput {...name} ref={this.nameRef} />
           </li>
 
           <li className='input-list-item'>
-            <FormInput {...cvv} />
+            <FormInput {...cardNum} ref={this.cardNumRef} />
           </li>
-        </div>
 
-        <li className='input-list-item'>
-          <FormInput {...cpf} />
-        </li>
-      </ul>
+          <div className='two-columns-item'>
+            <li className='input-list-item'>
+              <FormInput {...expDate} ref={this.expDateRef} />
+            </li>
 
-      <Button type='submit'>Pagar</Button>
-    </form>
-  );
-};
+            <li className='input-list-item'>
+              <FormInput {...cvv} ref={this.cvvRef} />
+            </li>
+          </div>
+
+          <li className='input-list-item'>
+            <FormInput {...cpf} ref={this.cpfRef} />
+          </li>
+        </ul>
+
+        <Button type='submit' disabled={!payButtonEnabled}>
+          Pagar
+        </Button>
+      </form>
+    );
+  }
+}
 
 export default PaymentForm;

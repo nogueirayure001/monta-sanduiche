@@ -27,8 +27,9 @@ export const PAYMENT_FORM_DATA = [
     fieldName: "expirationDate",
     pattern: "^\\d{2}/\\d{2}/\\d{4}$",
     errorMessage: "DD/MM/AAAA",
-    extraValidityCheck: (e) => {
-      const expirationDate = e.target.value;
+    extraValidityCheck: (elem) => {
+      console.log(elem);
+      const expirationDate = elem.value;
       const datePieces = expirationDate.split("/");
       const date = new Date(
         `${datePieces[1]}-${datePieces[0]}-${datePieces[2]} 23:59:59`

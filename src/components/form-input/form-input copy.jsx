@@ -1,5 +1,5 @@
 import "./form-input.scss";
-import { Fragment, Component, createRef } from "react";
+import { Fragment, Component } from "react";
 
 class FormInput extends Component {
   constructor(props) {
@@ -8,38 +8,54 @@ class FormInput extends Component {
     this.state = {
       fieldValue: "",
       didBlurOnce: false,
-      showErrorMessage: false,
+      isValueWrong: true,
     };
-
-    this.inputField = createRef();
   }
 
-  handleChange = () => {
-    const inputField = this.inputField.current;
+  handleChange = (e) => {
+    const inputField = e.target;
     const { didBlurOnce } = this.state;
+    let { extraValidityCheck } = this.props;
+
+    if (!extraValidityCheck) {
+      extraValidityCheck = () => true;
+    }
 
     if (didBlurOnce) {
-      if (this.isFieldValid()) {
+      if (inputField.checkValidity() && extraValidityCheck(e)) {
         this.setState({
           fieldValue: inputField.value,
-          showErrorMessage: false,
+          isValueWrong: false,
         });
       } else {
-        this.setState({ fieldValue: inputField.value, showErrorMessage: true });
+        this.setState({ fieldValue: inputField.value, isValueWrong: true });
       }
     } else {
-      this.setState({ fieldValue: inputField.value });
+      if (inputField.checkValidity() && extraValidityCheck(e)) {
+        this.setState({
+          fieldValue: inputField.value,
+          isValueWrong: false,
+        });
+      } else {
+        this.setState({ fieldValue: inputField.value, isValueWrong: true });
+      }
     }
   };
 
-  handleBlur = () => {
+  handleBlur = (e) => {
+    const inputField = e.target;
     const { didBlurOnce } = this.state;
+    let { extraValidityCheck } = this.props;
+
+    if (!extraValidityCheck) {
+      extraValidityCheck = () => true;
+    }
 
     if (!didBlurOnce) {
-      if (!this.isFieldValid()) {
-        this.setState({ didBlurOnce: true, showErrorMessage: true });
-      } else {
+      if (!inputField.checkValidity() || !extraValidityCheck(e)) {
         this.setState({ didBlurOnce: true });
+      } else {
+        this.setState({ didBlurOnce: true, isValueWrong: false });
       }
     }
   };
@@ -48,21 +64,21 @@ class FormInput extends Component {
     return this.state.fieldValue;
   };
 
-  isFieldValid = () => {
-    const inputField = this.inputField.current;
+  isFieldValid = (e) => {
+    const inputField = e.target;
     let { extraValidityCheck } = this.props;
 
     if (!extraValidityCheck) {
       extraValidityCheck = () => true;
     }
 
-    return inputField.checkValidity() && extraValidityCheck(inputField);
+    return inputField.checkValidity() && extraValidityCheck(e);
   };
 
   render() {
     const { label, id, type, fieldName, required, pattern, errorMessage } =
       this.props;
-    const { fieldValue, showErrorMessage } = this.state;
+    const { fieldValue, isValueWrong, didBlurOnce } = this.state;
 
     return (
       <Fragment>
@@ -75,14 +91,13 @@ class FormInput extends Component {
           pattern={pattern ? pattern : null}
           onChange={this.handleChange}
           onBlur={this.handleBlur}
-          ref={this.inputField}
         />
 
         <label className='form-input-label' htmlFor={id}>
           {label}
         </label>
 
-        {showErrorMessage ? (
+        {didBlurOnce && isValueWrong ? (
           <p className='error-message'>{errorMessage}</p>
         ) : null}
       </Fragment>

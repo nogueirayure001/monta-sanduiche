@@ -35,26 +35,17 @@ export const signUpUser = async (name, email, password) => {
     );
 
     const user = userCredential.user;
-
     await updateProfile(user, { displayName: name });
   } catch (error) {
-    // const errorCode = error.code;
-    const errorMessage = error.message;
-    console.log(errorMessage);
+    return error.message;
   }
 };
 
 export const signInUser = async (email, password) => {
   try {
-    //const userCredential =
     await signInWithEmailAndPassword(auth, email, password);
-
-    // const user = userCredential.user;
   } catch (error) {
-    // const errorCode = error.code;
-    const errorMessage = error.message;
-    console.log(errorMessage);
-    return errorMessage;
+    return error.message;
   }
 };
 
@@ -64,15 +55,8 @@ export const signOutUser = async () => {
 
 export const signUserWithGooglePopUp = async () => {
   try {
-    //const result =
     await signInWithPopup(auth, provider);
-    // const credential = GoogleAuthProvider.credentialFromResult(result);
-    // const token = credential.accessToken;
-    // const user = result.user;
   } catch (error) {
-    // const errorCode = error.code;
-    // const errorMessage = error.message;
-    // const email = error.email;
-    // const credential = GoogleAuthProvider.credentialFromError(error);
+    return error.message;
   }
 };

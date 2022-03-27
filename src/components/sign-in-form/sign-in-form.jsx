@@ -2,47 +2,86 @@ import FormInput from "../form-input/form-input";
 import Button from "../button/button";
 import { SIGN_IN_FORM_DATA } from "../../assets/data/form.data";
 import "./sign-in-form.scss";
-import { useRef } from "react";
 import { signInUser, signUserWithGooglePopUp } from "../../utils/firebase";
+import { Component, createRef } from "react";
 
-const SignUpForm = () => {
-  const [email, pwd] = SIGN_IN_FORM_DATA;
-  const [emailRef, pwdRef] = [useRef(null), useRef(null)];
+const errorList = {
+  "Firebase: Error (auth/user-not-found).": "Usuário não encontrado",
+  "Firebase: Error (auth/invalid-email).": "Email inválido",
+  "Firebase: Error (auth/user-disabled).": "Usuário bloqueado",
+  "Firebase: Error (auth/wrong-password).": "Senha incorreta",
+};
 
-  const getSignInData = () => {
-    const email = emailRef.current.getValue();
-    const pwd = pwdRef.current.getValue();
+class SignUpForm extends Component {
+  constructor(props) {
+    super(props);
 
-    return [email, pwd];
+    this.state = {
+      errorMessage: "",
+    };
+
+    this.emailRef = createRef();
+    this.pwdRef = createRef();
+  }
+
+  getSignInData = () => {
+    const emailValue = this.emailRef.current.getValue();
+    const pwdValue = this.pwdRef.current.getValue();
+
+    return [emailValue, pwdValue];
   };
 
-  const handleSubmit = (e) => {
+  handleSubmit = async (e) => {
     e.preventDefault();
 
-    signInUser(...getSignInData());
+    const allFieldsValid = e.target.checkValidity();
+
+    if (!allFieldsValid) {
+      this.emailRef.current.handleBlur();
+      this.pwdRef.current.handleBlur();
+
+      return;
+    }
+
+    const result = await signInUser(...this.getSignInData());
+
+    if (result) {
+      this.setState({ errorMessage: errorList[result] });
+    } else {
+      this.setState({ errorMessage: "" });
+    }
   };
 
-  return (
-    <form className='sign-in-form' onSubmit={handleSubmit} noValidate>
-      <ul className='input-list'>
-        <li className='input-list-item'>
-          <FormInput {...email} ref={emailRef} />
-        </li>
+  render() {
+    const [email, pwd] = SIGN_IN_FORM_DATA;
+    const { errorMessage } = this.state;
 
-        <li className='input-list-item'>
-          <FormInput {...pwd} ref={pwdRef} />
-        </li>
-      </ul>
+    return (
+      <form className='sign-in-form' onSubmit={this.handleSubmit} noValidate>
+        <ul className='input-list'>
+          <li className='input-list-item'>
+            <FormInput {...email} ref={this.emailRef} />
+          </li>
 
-      <div className='button-group'>
-        <Button type='submit'>Entrar</Button>
+          <li className='input-list-item'>
+            <FormInput {...pwd} ref={this.pwdRef} />
+          </li>
+        </ul>
 
-        <Button type='button' handleClick={signUserWithGooglePopUp}>
-          Entrar com Google
-        </Button>
-      </div>
-    </form>
-  );
-};
+        {errorMessage ? (
+          <p className='form-error-message'>{errorMessage}</p>
+        ) : null}
+
+        <div className='button-group'>
+          <Button type='submit'>Entrar</Button>
+
+          <Button type='button' handleClick={signUserWithGooglePopUp}>
+            Entrar com Google
+          </Button>
+        </div>
+      </form>
+    );
+  }
+}
 
 export default SignUpForm;

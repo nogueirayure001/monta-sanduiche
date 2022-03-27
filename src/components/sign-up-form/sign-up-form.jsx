@@ -2,67 +2,107 @@ import FormInput from "../form-input/form-input";
 import Button from "../button/button";
 import { SIGN_UP_FORM_DATA } from "../../assets/data/form.data";
 import "./sign-up-form.scss";
-import { useRef } from "react";
+import { Component, createRef } from "react";
 import { signUpUser } from "../../utils/firebase";
 
-const SignUpForm = () => {
-  const [name, email, emailConf, pwd, pwdConf] = SIGN_UP_FORM_DATA;
-  const [nameRef, emailRef, emailConfRef, pwdRef, pwdConfRef] = [
-    useRef(null),
-    useRef(null),
-    useRef(null),
-    useRef(null),
-    useRef(null),
-  ];
+const errorList = {
+  "Firebase: Error (auth/email-already-in-use).": "Email já esta em uso",
+  "Firebase: Error (auth/invalid-email).": "Email inválido",
+  "Firebase: Error (auth/operation-not-allowed).": "Operação não permitida",
+  "Firebase: Error (auth/weak-password).": "Senha muito fraca",
+};
 
-  const verifyValidity = () =>
-    nameRef.current.getValue() &&
-    emailRef.current.getValue() === emailConfRef.current.getValue() &&
-    pwdRef.current.getValue() === pwdConfRef.current.getValue();
+class SignUpForm extends Component {
+  constructor(props) {
+    super(props);
 
-  const getSignUpData = () => {
-    const name = nameRef.current.getValue();
-    const email = emailRef.current.getValue();
-    const pwd = pwdRef.current.getValue();
+    this.state = {
+      errorMessage: "",
+    };
 
-    return [name, email, pwd];
+    this.nameRef = createRef();
+    this.emailRef = createRef();
+    this.emailConfRef = createRef();
+    this.pwdRef = createRef();
+    this.pwdConfRef = createRef();
+  }
+
+  verifyValidity = () => {
+    return (
+      this.nameRef.current.getValue() &&
+      this.emailRef.current.getValue() ===
+        this.emailConfRef.current.getValue() &&
+      this.pwdRef.current.getValue() === this.pwdConfRef.current.getValue()
+    );
   };
 
-  const handleSubmit = (e) => {
+  getSignUpData = () => {
+    const nameValue = this.nameRef.current.getValue();
+    const emailValue = this.emailRef.current.getValue();
+    const pwdValue = this.pwdRef.current.getValue();
+
+    return [nameValue, emailValue, pwdValue];
+  };
+
+  handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (verifyValidity()) {
-      signUpUser(...getSignUpData());
+    const allFieldsValid = e.target.checkValidity();
+
+    if (!allFieldsValid) {
+      this.nameRef.current.handleBlur();
+      this.emailRef.current.handleBlur();
+      this.emailConfRef.current.handleBlur();
+      this.pwdRef.current.handleBlur();
+      this.pwdConfRef.current.handleBlur();
+      return;
+    }
+
+    const result = await signUpUser(...this.getSignUpData());
+
+    if (result) {
+      this.setState({ errorMessage: errorList[result] });
+    } else {
+      this.setState({ errorMessage: "" });
     }
   };
 
-  return (
-    <form className='sign-up-form' onSubmit={handleSubmit} noValidate>
-      <ul className='input-list'>
-        <li className='input-list-item'>
-          <FormInput {...name} ref={nameRef} />
-        </li>
+  render() {
+    const [name, email, emailConf, pwd, pwdConf] = SIGN_UP_FORM_DATA;
+    const { errorMessage } = this.state;
 
-        <li className='input-list-item'>
-          <FormInput {...email} ref={emailRef} />
-        </li>
+    return (
+      <form className='sign-up-form' onSubmit={this.handleSubmit} noValidate>
+        <ul className='input-list'>
+          <li className='input-list-item'>
+            <FormInput {...name} ref={this.nameRef} />
+          </li>
 
-        <li className='input-list-item'>
-          <FormInput {...emailConf} ref={emailConfRef} />
-        </li>
+          <li className='input-list-item'>
+            <FormInput {...email} ref={this.emailRef} />
+          </li>
 
-        <li className='input-list-item'>
-          <FormInput {...pwd} ref={pwdRef} />
-        </li>
+          <li className='input-list-item'>
+            <FormInput {...emailConf} ref={this.emailConfRef} />
+          </li>
 
-        <li className='input-list-item'>
-          <FormInput {...pwdConf} ref={pwdConfRef} />
-        </li>
-      </ul>
+          <li className='input-list-item'>
+            <FormInput {...pwd} ref={this.pwdRef} />
+          </li>
 
-      <Button type='submit'>Cadastrar</Button>
-    </form>
-  );
-};
+          <li className='input-list-item'>
+            <FormInput {...pwdConf} ref={this.pwdConfRef} />
+          </li>
+        </ul>
+
+        {errorMessage ? (
+          <p className='form-error-message'>{errorMessage}</p>
+        ) : null}
+
+        <Button type='submit'>Cadastrar</Button>
+      </form>
+    );
+  }
+}
 
 export default SignUpForm;
