@@ -34,6 +34,10 @@ export const PAYMENT_FORM_DATA = [
         `${datePieces[1]}-${datePieces[0]}-${datePieces[2]} 23:59:59`
       );
 
+      alert(date.valueOf());
+      alert(Date.now());
+      alert(date.valueOf() - Date.now());
+
       return date.valueOf() - Date.now() > 0;
     },
   },

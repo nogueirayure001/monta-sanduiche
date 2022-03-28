@@ -34,6 +34,7 @@ class FormInput extends Component {
 
   handleBlur = () => {
     const { didBlurOnce } = this.state;
+    // const {} = this.props;
 
     if (!didBlurOnce) {
       if (!this.isFieldValid()) {
@@ -42,6 +43,8 @@ class FormInput extends Component {
         this.setState({ didBlurOnce: true });
       }
     }
+
+    alert(this.isFieldValid());
   };
 
   getValue = () => {
