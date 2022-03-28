@@ -31,18 +31,8 @@ export const PAYMENT_FORM_DATA = [
       const expirationDate = elem.value;
       const datePieces = expirationDate.split("/");
       const date = new Date(
-        `${datePieces[1]}-${datePieces[0]}-${datePieces[2]} 23:59:59`
+        `${datePieces[2]}-${datePieces[1]}-${datePieces[0]} 23:59:59`
       );
-
-      alert("7:::: " + date.getTime());
-      alert(date.getTime());
-      alert(date);
-      alert(`${datePieces[2]}-${datePieces[1]}-${datePieces[0]} 23:59:59`);
-      alert(
-        new Date(`${datePieces[2]}-${datePieces[1]}-${datePieces[0]} 23:59:59`)
-      );
-      alert(Date.now());
-      alert(date.getTime() - Date.now());
 
       return date.getTime() - Date.now() > 0;
     },
