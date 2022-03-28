@@ -48,6 +48,16 @@ class FormInput extends Component {
     return this.state.fieldValue;
   };
 
+  clearField = () => {
+    this.setState({
+      fieldValue: "",
+      didBlurOnce: false,
+      showErrorMessage: false,
+    });
+
+    this.inputField.current.value = "";
+  };
+
   isFieldValid = () => {
     const inputField = this.inputField.current;
     let { extraValidityCheck } = this.props;

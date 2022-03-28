@@ -4,7 +4,9 @@ import OrderPayment from "../../components/order-payment/order-payment";
 import { Navigate } from "react-router-dom";
 import "./checkout.scss";
 
-const Checkout = ({ user, cart }) => {
+const Checkout = (props) => {
+  const { user, cart } = props;
+
   return user ? (
     <main className='checkout-page'>
       <PageTitle title='Pague Seu Sanduíche' />
@@ -12,7 +14,7 @@ const Checkout = ({ user, cart }) => {
       <div className='main-content'>
         <OrderSummary cart={cart} />
 
-        <OrderPayment cart={cart} />
+        <OrderPayment {...props} />
       </div>
     </main>
   ) : (

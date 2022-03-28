@@ -1,0 +1,46 @@
+$bg-white: #fff;
+$text-red: #8e0000;
+
+.modal-wrapper {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 2.5rem;
+  background-color: hsla(0, 0%, 0%, 0.6);
+  overflow: auto;
+  z-index: 3;
+
+  &.hidden {
+    display: none;
+  }
+
+  .modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    max-width: 55rem;
+    padding: 2.5rem;
+    border-radius: 0.25rem;
+    background-color: $bg-white;
+
+    .modal-title {
+      margin-bottom: 2.5rem;
+      text-align: center;
+      font-size: 2rem;
+      font-family: "Lobster", cursive;
+      color: $text-red;
+    }
+
+    .modal-message {
+      margin-bottom: 8rem;
+      font-size: 1.5rem;
+      text-align: left;
+    }
+
+    button {
+      max-width: 15rem;
+    }
+  }
+}

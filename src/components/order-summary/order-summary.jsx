@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import "./order-summary.scss";
 import Illustration from "../illustration/illustration";
 import OrderList from "../order-list/order-list";
@@ -15,14 +16,20 @@ const OrderSummary = ({ cart }) => {
       <p className='thanks-message'>Obrigado pela Preferência!</p>
 
       <div className='order-list-wrapper'>
-        <h3 className='list-title'>Resumo do Pedido:</h3>
+        {cart.length ? (
+          <Fragment>
+            <h3 className='list-title'>Resumo do Pedido:</h3>
 
-        <OrderList cart={cart} />
+            <OrderList cart={cart} />
 
-        <p>
-          <span className='order-total'>Total:</span> R${" "}
-          {totalAmountDue.toFixed(2).replace(".", ",")}
-        </p>
+            <p>
+              <span className='order-total'>Total:</span> R${" "}
+              {totalAmountDue.toFixed(2).replace(".", ",")}
+            </p>
+          </Fragment>
+        ) : (
+          <h3 className='list-title'>Esqueceu de escolher o que vai comer?</h3>
+        )}
       </div>
     </div>
   );

@@ -36,9 +36,7 @@ class PageHeader extends Component {
   };
 
   handleLogOff = () => {
-    const { user, clearCart, saveCart } = this.props;
-
-    saveCart(user.uid);
+    const { clearCart } = this.props;
 
     clearCart();
 

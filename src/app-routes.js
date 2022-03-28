@@ -75,8 +75,10 @@ class AppRoutes extends Component {
     });
   };
 
-  addToCart = () => {
-    this.setState((prevState) => {
+  addToCart = async () => {
+    const { user } = this.state;
+
+    await this.setState((prevState) => {
       let isCopy = false;
       const newCart = JSON.parse(JSON.stringify(prevState.cart));
       const newOrder = {
@@ -98,9 +100,13 @@ class AppRoutes extends Component {
 
       return { cart: newCart };
     });
+
+    this.saveCart(user.uid);
   };
 
-  updateCart = (item, addition) => {
+  updateCart = async (item, addition) => {
+    const { user } = this.state;
+
     if (item.howMany + addition < 1) return;
 
     const newCart = JSON.parse(JSON.stringify(this.state.cart));
@@ -113,7 +119,9 @@ class AppRoutes extends Component {
       return true;
     });
 
-    this.setState({ cart: newCart });
+    await this.setState({ cart: newCart });
+
+    this.saveCart(user.uid);
   };
 
   deleteFromCart = (item) => {
@@ -208,7 +216,9 @@ class AppRoutes extends Component {
 
             <Route
               path='/checkout'
-              element={<Checkout user={user} cart={cart} />}
+              element={
+                <Checkout user={user} cart={cart} clearCart={this.clearCart} />
+              }
             />
           </Route>
         </Routes>
