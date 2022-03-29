@@ -144,7 +144,7 @@ Possui duas abas:
 - Ao clicar em pagar e o pagamento for aprovado, a pagina abrirá um modal indicando sucesso da operação.
 - Ao clicar em pagar e o pagamento for recusado (caso de teste em que o número do cartão é 111111111111), a paginá abrirá um modal indicando o fracasso da operação.
 - Os modais podem ser fechados clicando no botão disponibilizado no próprio modal ou clicando fora do modal.
-  ![](./screenshots/payment.png)
+  ![](./screenshots/payment2.png)
 
 ### Sair | Log-Out
 
